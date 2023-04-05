@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 function renderTable(headers, rows, nav) {
     const headerList = headers.map((val, _) => <td>{val}</td>)
-    const rowsList = rows.map(row => {
+    const rowsList = rows?.map(row => {
     return (
-    <tr onClick={() => nav(`/organisation?orgName=${row.name}`)}>
+    <tr onClick={() => nav(`/organisation?orgName=${row.name}&id=${row.id}`)}>
         <td >{row.id}</td>
         <td>{row.name}</td>
         <td>{row.address}</td>
