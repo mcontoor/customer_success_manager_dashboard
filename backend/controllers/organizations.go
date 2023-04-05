@@ -3,7 +3,6 @@ package controllers
 import (
 	"fmt"
 	"net/http"
-	"time"
 
 	db "cs-backend/db"
 	structures "cs-backend/structures"
@@ -11,19 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Organization struct {
-	Id              int
-	Name            string
-	Address         string
-	CreatedAt       *time.Time `json:"created_at"`
-	DealAmount      int        `json:"deal_amount"`
-	DaysTillRenewal int        `json:"days_till_renewal"`
-}
-
 func GetOrganizations(c *gin.Context) {
-	c.Header("Access-Control-Allow-Origin", "*")
-	c.Header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS")
-
 	q := c.Query("q")
 
 	sqlQuery := "SELECT * FROM organizations"
@@ -53,4 +40,8 @@ func GetOrganizations(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, data)
+}
+
+func GetOrgSpecificData(c *gin.Context) {
+
 }
