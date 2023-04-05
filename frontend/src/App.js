@@ -5,6 +5,7 @@ import Organisation from "./pages/Organisation";
 
 import './App.css';
 
+// redirect hoem page to organisations pg
 function App() {
   return (
     <div>

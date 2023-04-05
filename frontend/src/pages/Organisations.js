@@ -6,7 +6,7 @@ function renderTable(headers, rows, nav) {
     const rowsList = rows?.map(row => {
     return (
     <tr onClick={() => nav(`/organisation?orgName=${row.name}&id=${row.id}`)}>
-        <td >{row.id}</td>
+        <td>{row.id}</td>
         <td>{row.name}</td>
         <td>{row.address}</td>
         <td>{row.created_at}</td>
