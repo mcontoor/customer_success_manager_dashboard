@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import './Organisations.css'
+
 function renderTable(headers, rows, nav) {
     const headerList = headers.map((val, _) => <td>{val}</td>)
     const rowsList = rows?.map(row => {
@@ -10,11 +12,11 @@ function renderTable(headers, rows, nav) {
         <td>{row.name}</td>
         <td>{row.address}</td>
         <td>{row.created_at}</td>
-        <td>{row.deal_amount}</td>
+        <td>${row.deal_amount}</td>
         <td>{row.days_till_renewal}</td>
     </tr>)})
     return (
-        <table>
+        <table className='orgs-table' border={1}>
             <tr>
                 {headerList}
             </tr>
@@ -46,9 +48,15 @@ export default function Organisations() {
     return (
         <div>
         <h1>Organisations</h1>
-        <input value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+        <label>Search by Name: </label>
+        <input 
+            className='search-input'
+            value={searchText} 
+            onChange={(e) => setSearchText(e.target.value)} 
+        />
+        <div className='table-container'>
         {renderTable(headers, orgsList, navigate)}
         </div>
-        
+        </div>
     )
 }

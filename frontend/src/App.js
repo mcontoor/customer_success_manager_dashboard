@@ -1,14 +1,13 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Organisations from "./pages/Organisations";
-import Organisation from "./pages/Organisation";
+import Organisations from "./pages/Organisations/Organisations";
+import Organisation from "./pages/Organisation/Organisation";
 
 import './App.css';
 
-// redirect hoem page to organisations pg
 function App() {
   return (
-    <div>
+    <div className='App'>
       <Router>
         <Routes>
         <Route path="/" element={<Organisations />} />
