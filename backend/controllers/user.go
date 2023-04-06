@@ -6,14 +6,20 @@ import (
 	"fmt"
 	"net/http"
 	"regexp"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
 func GetAllUsersInAnOrganization(c *gin.Context) {
 	id := c.Param("id")
-	sortBy := c.Query("sortby")
+	sortBy := c.Query("sortBy")
 	order := c.Query("order")
+	page := c.Query("page")
+	pageInt, _ := strconv.Atoi(page)
+
+	limit := 8
+	offset := pageInt * limit
 
 	r, _ := regexp.Compile("[a-zA-Z]+")
 
@@ -22,19 +28,20 @@ func GetAllUsersInAnOrganization(c *gin.Context) {
 		return
 	}
 
-	fmt.Println(id)
-
 	query := fmt.Sprintf("SELECT * from users WHERE organization_id = %s", id)
 	if sortBy != "" {
 		query += fmt.Sprintf(" ORDER BY %s", sortBy)
 		if order != "" {
-			if order == "asc" {
+			if order == "ASC" {
 				query += " ASC"
-			} else if order == "desc" {
+			} else if order == "DESC" {
 				query += " DESC"
 			}
 		}
 	}
+	query += fmt.Sprintf(" LIMIT %d OFFSET %d", limit, offset)
+
+	fmt.Println(query)
 
 	rows, err := db.Db.Query(query)
 	if err != nil {
